@@ -15,6 +15,15 @@
             </div>
         </div>
         {{carrito}}
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                <div{% if message.tags %} class="alert alert-sm alert-{{ message.tags }}"{% endif %}>
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+        {% endif %}
         <div class="row">
             <div class="col-8">
                 <div class="row" style="padding: 10px 0;">

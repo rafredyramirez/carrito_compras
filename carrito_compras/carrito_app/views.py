@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from carrito_app.Carrito import Carrito
 from carrito_app.models import Producto
-
+from django.contrib import messages
 
 # Create your views here.
 def tienda(request):
@@ -17,7 +17,9 @@ def tienda(request):
 def agregar_producto(request, producto_id):
     carrito = Carrito(request)
     producto = Producto.objects.get(id=producto_id)
-    carrito.agregar(producto)
+    respuesta = carrito.agregar(producto)
+    if not respuesta:
+        messages.error(request, 'Se ha excedido la cantidad de producto disponible')
     return redirect('tienda')
 
 def eliminar_producto(request, producto_id):

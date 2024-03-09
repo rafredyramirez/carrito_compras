@@ -17,17 +17,22 @@ class Carrito:
 
     def agregar(self, producto):
         id = str(producto.id)
-        if id not in self.carrito.keys():
+        if (id not in self.carrito.keys()) and (producto.cantidad_disponible > 0):
             self.carrito[id]={
                 'producto_id': producto.id,
                 'nombre': producto.nombre,
                 'acumulado': CalculadoraAcumulado(producto, 1).calcular_acumulado(),
                 'cantidad': 1,
             }
-        else:
+            respuesta = True
+        elif (id in self.carrito.keys()) and (self.carrito[id]['cantidad'] + 1 <= producto.cantidad_disponible):
             self.carrito[id]['cantidad'] += 1
             self.carrito[id]['acumulado'] = CalculadoraAcumulado(producto, self.carrito[id]['cantidad']).calcular_acumulado()
+            respuesta = True
+        else:
+            respuesta = False
         self.guardar_carrito()
+        return respuesta
 
     def eliminar(self, producto):
         id = str(producto.id)
