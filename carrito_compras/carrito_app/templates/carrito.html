@@ -12,23 +12,23 @@
         </thead>
         <tbody>
             {% if request.session.carrito.items %}
-                {% for key, value in request.session.carrito.items %}
-                    <tr>
-                        <td>{{value.nombre}}</td>
-                        <td>{{value.acumulado}}</td>
-                        <td>{{value.cantidad}}
-                            <a href="{% url 'agregar' value.producto_id %}" class="badge btn btn-dark badge-dark">+</a>
-                            <a href="{% url 'restar' value.producto_id %}" class="badge btn btn-dark badge-dark">-</a>
-                            <a href="{% url 'eliminar' value.producto_id %}" class="badge btn btn-dark badge-dark">x</a>
-                        </td>
-                    </tr>
-                {% endfor %}
+            {% for key, value in request.session.carrito.items %}
+            <tr>
+                <td>{{value.nombre}}</td>
+                <td>{{value.acumulado}}</td>
+                <td>{{value.cantidad}}
+                    <a href="{% url 'agregar' value.producto_id %}" class="badge btn btn-dark badge-dark">+</a>
+                    <a href="{% url 'restar' value.producto_id %}" class="badge btn btn-dark badge-dark">-</a>
+                    <a href="{% url 'eliminar' value.producto_id %}" class="badge btn btn-dark badge-dark">x</a>
+                </td>
+            </tr>
+            {% endfor %}
             {% else %}
-                <tr>
-                    <td colspan="3">
-                        <div class="alert alert-danger text-center"> Sin Productos </div>
-                    </td>
-                </tr>
+            <tr>
+                <td colspan="3">
+                    <div class="alert alert-danger text-center"> Sin Productos </div>
+                </td>
+            </tr>
             {% endif %}
             <tr>
                 <th scope="row">Total:</th>
@@ -40,5 +40,5 @@
 </div>
 <div class="row text-center">
     <div class="col-6"><a href="{% url 'limpiar' %}" class="btn btn-danger">Limpiar</a></div>
-    <div class="col-6"><a href="#" class="btn btn-success">Guardar</a></div>
+    <div class="col-6"><a href="{% url 'finalizar_compra' %}" class="btn btn-success">Finalizar compra</a></div>
 </div>

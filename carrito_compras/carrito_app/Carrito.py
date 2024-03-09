@@ -2,7 +2,7 @@ from carrito_app.CalculadoraAcumulado import CalculadoraAcumulado
 
 class Carrito:
     def __init__(self, request):
-        self.request = request
+        #self.request = request
         self.session = request.session
         carrito = self.session.get('carrito')
         if not carrito:

@@ -38,3 +38,17 @@ def limpiar_carrito(request):
     carrito = Carrito(request)
     carrito.limpiar()
     return redirect('tienda')
+
+def finalizar_compra(request):
+    compra_finalizar = Carrito(request)
+    if len(compra_finalizar.carrito) == 0:
+        messages.error(request, 'Agrega al menos un producto al carrito')
+        return redirect('tienda')
+    else:
+        for id, producto_carrito in compra_finalizar.carrito.items():
+            producto_bd = Producto.objects.get(id=id)
+            producto_bd.cantidad_disponible = producto_bd.cantidad_disponible - producto_carrito['cantidad']
+            producto_bd.save()
+        compra_finalizar.limpiar()
+        messages.success(request, 'Compra finalizada exitosamente')
+        return redirect('tienda')
