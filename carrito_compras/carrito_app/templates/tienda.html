@@ -38,6 +38,7 @@
                                         <p class="card-text">{{producto.nombre}}</p>
                                         <p class="card-text">{{producto.cantidad_disponible}}</p>
                                         <p class="card-text">{{producto.precio_unitario}}</p>
+                                        <img src="{{ producto.foto.url }}" alt="{{producto.sku}}">
                                         <a href="{% url 'agregar' producto.id %}" class="btn btn-primary">Agregar al
                                             carrito</a>
                                     </div>

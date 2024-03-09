@@ -7,6 +7,7 @@ class Producto(models.Model):
     descripcion = models.CharField(max_length=50, blank=False, null=False)
     cantidad_disponible = models.FloatField()
     precio_unitario = models.FloatField()
+    foto = models.ImageField(upload_to='productos', default='productos/generico.jpg')
 
     class Meta:
         managed = True
