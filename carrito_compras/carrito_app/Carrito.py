@@ -2,16 +2,18 @@ from carrito_app.CalculadoraAcumulado import CalculadoraAcumulado
 
 class Carrito:
     def __init__(self, request):
-        #self.request = request
+        # Obtener la referencia a la variable (dict) de la sesion actual
         self.session = request.session
-        carrito = self.session.get('carrito')
-        if not carrito:
+        # Sino existe la entrada carrito, se crea en la sesion
+        if not self.session.get('carrito'):
             self.session['carrito'] = {}
             self.carrito = self.session['carrito']
         else:
-            self.carrito = carrito
+            # Si existe el carrito en la sesion, se obtiene en una variable a parte
+            self.carrito = self.session.get('carrito')
 
     def guardar_carrito(self):
+        # Actualizar el carrito en la sesion
         self.session['carrito'] = self.carrito
         self.session.modified = True
 

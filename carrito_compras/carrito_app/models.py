@@ -14,3 +14,13 @@ class Producto(models.Model):
 
     def __str__(self):
         return self.nombre
+    
+class Venta(models.Model):
+    valor_total = models.FloatField()
+
+    class Meta:
+        managed = True
+        db_table = 'venta'
+
+    def __str__(self):
+        return str(self.valor_total)

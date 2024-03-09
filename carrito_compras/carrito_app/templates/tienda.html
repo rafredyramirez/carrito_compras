@@ -9,20 +9,21 @@
 
 <body>
     <div class="container">
-        <div class="row">
-            <div class="col-12 align-self-center">
-                <h1 class="display-1">TIENDA</h1>
-            </div>
+    <div class="row">
+        <div class="col-12 align-self-center">
+            <h1 class="display-1">TIENDA</h1>
         </div>
-        {{carrito}}
-        {% if messages %}
+    </div>
+    <h1>Ventas totales Tienda: $ {{ventas}}</h1>
+    {{carrito}}
+    {% if messages %}
         <div class="messages">
             {% for message in messages %}
             <div{% if message.tags %} class="alert alert-sm alert-{{ message.tags }}" {% endif %}>
-                {{ message }}
+                    {{ message }}
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
-    </div>
     {% endif %}
     <div class="row">
         <div class="col-8">
@@ -30,18 +31,18 @@
                 <div class="col-12">
                     <div class="row">
                         {% for producto in productos %}
-                        <div class="col-6">
-                            <div class="card" style="height: 10rem; width: 23rem; margin: 5px 0px;">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{producto.sku}}</h5>
-                                    <p class="card-text">{{producto.nombre}}</p>
-                                    <p class="card-text">{{producto.cantidad_disponible}}</p>
-                                    <p class="card-text">{{producto.precio_unitario}}</p>
-                                    <a href="{% url 'agregar' producto.id %}" class="btn btn-primary">Agregar al
-                                        carrito</a>
+                            <div class="col-6">
+                                <div class="card" style="height: 10rem; width: 23rem; margin: 5px 0px;">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{producto.sku}}</h5>
+                                        <p class="card-text">{{producto.nombre}}</p>
+                                        <p class="card-text">{{producto.cantidad_disponible}}</p>
+                                        <p class="card-text">{{producto.precio_unitario}}</p>
+                                        <a href="{% url 'agregar' producto.id %}" class="btn btn-primary">Agregar al
+                                            carrito</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         {% endfor %}
                     </div>
                 </div>
