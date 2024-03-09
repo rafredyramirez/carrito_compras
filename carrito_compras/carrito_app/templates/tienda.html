@@ -21,17 +21,17 @@
                     <div class="col-12">
                         <div class="row">
                             {% for producto in productos %}
-                            <div class="col-6">
-                                <div class="card" style="height: 10rem; width: 23rem; margin: 5px 0px;">
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{producto.sku}}</h5>
-                                        <p class="card-text">{{producto.nombre}}</p>
-                                        <p class="card-text">{{producto.precio_unitario}}</p>
-                                        <a href="{% url 'Add' producto.id %}" class="btn btn-primary">Agregar al
-                                            carrito</a>
+                                <div class="col-6">
+                                    <div class="card" style="height: 10rem; width: 23rem; margin: 5px 0px;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{producto.sku}}</h5>
+                                            <p class="card-text">{{producto.nombre}}</p>
+                                            <p class="card-text">{{producto.precio_unitario}}</p>
+                                            <a href="{% url 'agregar' producto.id %}" class="btn btn-primary">Agregar al
+                                                carrito</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             {% endfor %}
                         </div>
                     </div>
