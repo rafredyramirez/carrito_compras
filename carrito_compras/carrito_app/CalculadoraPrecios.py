@@ -1,12 +1,9 @@
 class CalculadoraPrecios:
-    def __init__(self, producto):
+    def __init__(self, producto, cantidad):
         self.producto = producto
+        self.cantidad = cantidad
 
     def _obtener_tipo_producto(self):
-        lista_tipos = ['EA', 'WE', 'SP']
-
-
-
         if str(self.producto.sku).startswith('WE'):
             self.tipo_producto = 'peso'
         elif str(self.producto.sku).startswith('SP'):
@@ -14,13 +11,21 @@ class CalculadoraPrecios:
         else:
             self.tipo_producto = 'normal'
 
-    def calcular_precio(self):
+    def calcular_acumulado(self):
         self._obtener_tipo_producto()
-
         if self.tipo_producto == 'peso':
-            precio = 1 * 1000 * self.producto.precio_unitario
+            acumulado = 1 * 1000 * self.producto.precio_unitario * self.cantidad
         elif self.tipo_producto == 'descuento':
-            precio = ''
+            cociente = divmod(self.cantidad, 3)[0]
+            if cociente == 1:
+                descuento = 0.2
+            elif cociente == 2:
+                descuento = 0.4
+            elif cociente >= 3:
+                descuento = 0.5
+            else:
+                descuento = 0
+            acumulado = (self.producto.precio_unitario * self.cantidad) - (self.producto.precio_unitario * self.cantidad * descuento)
         else:
-            precio = self.producto.precio_unitario
-        return precio
+            acumulado = self.producto.precio_unitario * self.cantidad
+        return acumulado

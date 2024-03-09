@@ -18,12 +18,12 @@ class Carrito:
             self.carrito[id]={
                 "producto_id": producto.id,
                 "nombre": producto.nombre,
-                "acumulado": CalculadoraPrecios(producto).calcular_precio(),
+                "acumulado": CalculadoraPrecios(producto, 1).calcular_acumulado(),
                 "cantidad": 1,
             }
         else:
             self.carrito[id]["cantidad"] += 1
-            self.carrito[id]["acumulado"] += CalculadoraPrecios(producto).calcular_precio()
+            self.carrito[id]["acumulado"] = CalculadoraPrecios(producto, self.carrito[id]["cantidad"]).calcular_acumulado()
         self.guardar_carrito()
 
     def guardar_carrito(self):
@@ -40,8 +40,7 @@ class Carrito:
         id = str(producto.id)
         if id in self.carrito.keys():
             self.carrito[id]["cantidad"] -= 1
-            self.carrito[id]["acumulado"] -= CalculadoraPrecios(producto).calcular_precio()
-            if self.carrito[id]["cantidad"] <= 0: self.eliminar(producto)
+            self.carrito[id]["acumulado"] = CalculadoraPrecios(producto, self.carrito[id]["cantidad"]).calcular_acumulado()
             self.guardar_carrito()
 
     def limpiar(self):
