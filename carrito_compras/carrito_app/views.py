@@ -12,8 +12,7 @@ def tienda(request):
         request, 'tienda.html', 
         {
             'productos': productos,
-            'ventas': venta_total_tienda,
-            'carrito': request.session['carrito'] if 'carrito' in request.session.keys() else {}
+            'ventas': venta_total_tienda
         }
     )
 
@@ -22,7 +21,7 @@ def agregar_producto(request, producto_id):
     producto = Producto.objects.get(id=producto_id)
     respuesta = carrito.agregar(producto)
     if not respuesta:
-        messages.error(request, 'Se ha excedido la cantidad de producto disponible')
+        messages.error(request, 'No hay unidades disponibles en: '+ str(producto))
     return redirect('tienda')
 
 def eliminar_producto(request, producto_id):
